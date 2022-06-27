@@ -1,0 +1,79 @@
+# ---------- Functions --------------------------
+def number_check(x):
+    while x.isnumeric() == False:
+        print("The number of pencils should be numeric")
+        x = input()
+    if int(x) <= 0:
+        print("The number of pencils should be positive")
+        x = input()
+        x = number_check(x)
+    return int(x) 
+        
+           
+def name_check(x):
+    while x != 'John' and x != 'Jack':
+        print("Choose between 'John' and 'Jack'")
+        x = input()
+    return x
+
+def possible(x):
+    while not(x == '1' or x == '2' or x == '3'):
+        print("Possible values: '1', '2', '3'")
+        x = str(input())
+    return int(x)
+
+def turn(x):
+    if x == "John":
+        x = "Jack"
+    else:
+        x = "John"
+    return x
+
+def exist(x, y):
+    while x > y:
+        print("Too many pencils were taken")
+        x = int(input())
+    return int(x)
+
+def losing_sequence(x):
+    for i in range(1, x + 1, 4):
+        sequence.append(i)
+    return sequence
+
+# ----------- Main -------------------------------
+print("How many pencils would you like to use:")
+n = input()
+sequence = []
+n = number_check(n)
+n = int(n)
+sequence = losing_sequence(n)
+print("Who will be the first (John, Jack):")
+name = input()
+name = name_check(name)
+print("|" * n)
+bot = "Jack"
+r = n
+import random
+while r > 0:
+    print(name + "'s turn!")
+    if bot != name:
+        n = input()
+        n = possible(n)
+        n = exist(int(n), r)
+    else:
+        if (r in sequence) and (r != 1):
+            n = random.randint(1, 3)
+        elif (r - 1) in sequence:
+            n = 1
+        elif r == 1:
+            n = 1
+        elif (r - 2) in sequence:
+            n = 2
+        else:
+            n = 3
+        print(n)
+    r -= n
+    if r != 0:
+        print("|" * r )
+        name = turn(name)     
+print(turn(name)," won!")
